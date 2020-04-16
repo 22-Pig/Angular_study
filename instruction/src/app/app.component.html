@@ -1,0 +1,22 @@
+<h2 *ngIf="shouldShow">测试是否显示</h2>
+<input type="button" value="切换" (click)="onToggle()">
+
+
+<input type="number" [value]="score" (input)="onInput($event)">
+
+
+<p *ngIf=" score < 60">不及格</p>
+<p *ngIf=" score >= 60 && score < 70">及格</p>
+<p *ngIf=" score >= 70 && score < 80">中等</p>
+<p *ngIf=" score >= 80 && score < 90">良好</p>
+<p *ngIf=" score >= 90">优秀</p>
+
+
+<div [ngSwitch]="grade()">
+  <p *ngSwitchCase="6">及格</p>
+  <p *ngSwitchCase="7">中等</p>
+  <p *ngSwitchCase="8">良好</p>
+  <p *ngSwitchCase="9">优秀</p>
+  <p *ngSwitchCase="10">满分</p>
+  <p *ngSwitchDefault>其他</p>
+</div>
