@@ -23,17 +23,19 @@
 
 <p [style.background-color]="'pink'">这里直接采用style属性</p>
 <p [ngStyle]="{'background-color':'white','color':'orange'}">这里采用的是ngStyle</p>
-
-<h3>动态使用ngStyle</h3>
-<div class="form-group">
-  <label for="iptColor">颜色</label>
-  <input type="text" class="form-control" id="iptColor" aria-describedby="color" placeholder="输入颜色" #colorinput>
-</div>
-<div class="form-group">
-  <label for="iptTextSize">字体大小</label>
-  <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小" #fontinput>
-</div>
-<a class="btn btn-primary" href="#" role="button" (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
+<form action="">
+  <h3>动态使用ngStyle</h3>
+  <div class="form-group">
+    <label for="iptColor">颜色</label>
+    <input type="text" class="form-control" id="iptColor" aria-describedby="color" placeholder="输入颜色" #colorinput>
+  </div>
+  <div class="form-group">
+    <label for="iptTextSize">字体大小</label>
+    <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小"
+      #fontinput>
+  </div>
+  <a class="btn btn-primary" href="#" role="button" (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
+</form>
 
 <div>
   <span [ngStyle]="{color: 'red'}" [style.font-size]="fontSize">
