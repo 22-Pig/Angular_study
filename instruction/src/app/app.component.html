@@ -24,87 +24,84 @@
 <p [style.background-color]="'pink'">这里直接采用style属性</p>
 <p [ngStyle]="{'background-color':'white','color':'orange'}">这里采用的是ngStyle</p>
 
-<form>
-  <h3>动态使用ngStyle</h3>
-  <div class="form-group">
-    <label for="iptColor">颜色</label>
-    <input type="text" class="form-control" id="iptColor" aria-describedby="color" placeholder="输入颜色" #colorinput>
-  </div>
-  <div class="form-group">
-    <label for="iptTextSize">字体大小</label>
-    <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小"
-      #fontinput>
-  </div>
-  <a class="btn btn-primary" href="#" role="button" (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
+<h3>动态使用ngStyle</h3>
+<div class="form-group">
+  <label for="iptColor">颜色</label>
+  <input type="text" class="form-control" id="iptColor" aria-describedby="color" placeholder="输入颜色" #colorinput>
+</div>
+<div class="form-group">
+  <label for="iptTextSize">字体大小</label>
+  <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小" #fontinput>
+</div>
+<a class="btn btn-primary" href="#" role="button" (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
 
-  <div>
-    <span [ngStyle]="{color: 'red'}" [style.font-size]="fontSize">
-      红色文本
-    </span>
-  </div>
+<div>
+  <span [ngStyle]="{color: 'red'}" [style.font-size]="fontSize">
+    红色文本
+  </span>
+</div>
 
-  <div [style.background-color]="color" style="color: white;">
-    {{color}} 背景色
-  </div>
+<div [style.background-color]="color" style="color: white;">
+  {{color}} 背景色
+</div>
 
-  <div [ngStyle]="{'color': 'white', 'background-color':color,'font-size':fontSize}">
-    使用ngStyle动态修改
-  </div>
+<div [ngStyle]="{'color': 'white', 'background-color':color,'font-size':fontSize}">
+  使用ngStyle动态修改
+</div>
 
 
-  <h3>使用ngClass</h3>
-  <div [ngClass]="{bordered: isBoredered,blue:false,round:true}">有边框</div>
-  <div [ngClass]="classObj">采用JSON对象属性方式</div>
-  <div [ngClass]="{bordered: !isBoredered,blue:true}">无边框</div>
-  <div [ngClass]="['bordered','blue','round']">采用另外一种方式</div>
-  <a class="btn btn-primary" href="#" (click)="toggleBorder()">切换边框</a>
+<h3>使用ngClass</h3>
+<div [ngClass]="{bordered: isBoredered,blue:false,round:true}">有边框</div>
+<div [ngClass]="classObj">采用JSON对象属性方式</div>
+<div [ngClass]="{bordered: !isBoredered,blue:true}">无边框</div>
+<div [ngClass]="['bordered','blue','round']">采用另外一种方式</div>
+<a class="btn btn-primary" href="#" (click)="toggleBorder()">切换边框</a>
 
 
-  <h3>使用ngFor指令</h3>
-  <ul>
-    <li *ngFor='let city of cities'>{{city}}</li>
-    <!-- ngFor指令放在哪个标签上面，就生成对应的多个标签 -->
-  </ul>
+<h3>使用ngFor指令</h3>
+<ul>
+  <li *ngFor='let city of cities'>{{city}}</li>
+  <!-- ngFor指令放在哪个标签上面，就生成对应的多个标签 -->
+</ul>
 
-  <h4>表格案例</h4>
+<h4>表格案例</h4>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">名字</th>
+      <th scope="col">年龄</th>
+      <th scope="col">城市</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let p of people;let i = index'>
+      <th scope="row">{{i+1}}</th>
+      <td>{{p.name}}</td>
+      <td>{{p.age}}</td>
+      <td>{{p.city}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>表单案例2</h4>
+<div *ngFor='let p of peopleByCity'>
+  <h2>{{p.city}}</h2>
   <table class="table">
     <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
         <th scope="col">名字</th>
         <th scope="col">年龄</th>
-        <th scope="col">城市</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let p of people;let i = index'>
+      <tr *ngFor='let p2 of p.people;let i = index'>
         <th scope="row">{{i+1}}</th>
-        <td>{{p.name}}</td>
-        <td>{{p.age}}</td>
-        <td>{{p.city}}</td>
+        <td>{{p2.name}}</td>
+        <td>{{p2.age}}</td>
       </tr>
     </tbody>
   </table>
-
-
-  <h4>表单案例2</h4>
-  <div *ngFor='let p of peopleByCity'>
-    <h2>{{p.city}}</h2>
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">名字</th>
-          <th scope="col">年龄</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor='let p2 of p.people;let i = index'>
-          <th scope="row">{{i+1}}</th>
-          <td>{{p2.name}}</td>
-          <td>{{p2.age}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</form>
+</div>
