@@ -34,6 +34,8 @@
     <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小"
       #fontinput>
   </div>
+  <!-- 阻止a标签默认事件 -->
+  <!-- JavaScript：void(0)/ JavaScript： -->
   <a class="btn btn-primary" href="#" role="button" onclick="return false"
     (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
 </form>
