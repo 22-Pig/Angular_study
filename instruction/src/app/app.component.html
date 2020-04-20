@@ -34,7 +34,8 @@
     <input type="text" class="form-control" id="iptTextSize" aria-describedby="font size" placeholder="输入字体大小"
       #fontinput>
   </div>
-  <a class="btn btn-primary" href="#" role="button" (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
+  <a class="btn btn-primary" href="#" role="button" onclick="return false"
+    (click)="apply(colorinput.value,fontinput.value)">应用设置</a>
 </form>
 
 <div>
@@ -57,7 +58,7 @@
 <div [ngClass]="classObj">采用JSON对象属性方式</div>
 <div [ngClass]="{bordered: !isBoredered,blue:true}">无边框</div>
 <div [ngClass]="['bordered','blue','round']">采用另外一种方式</div>
-<a class="btn btn-primary" href="#" (click)="toggleBorder()">切换边框</a>
+<a class="btn btn-primary" href="#" onclick="return false" (click)="toggleBorder()">切换边框</a>
 
 
 <h3>使用ngFor指令</h3>
