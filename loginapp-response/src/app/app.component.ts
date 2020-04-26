@@ -43,6 +43,10 @@ export class AppComponent {
       alert('表单无效！');
       return;
     }
+    else if (this.myForm.valid) {
+      alert('表单填写成功！');
+      return;
+    }
 
     console.log(value);
   }
