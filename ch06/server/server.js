@@ -83,9 +83,9 @@ app.put('/user', function (req, resp) {
 app.delete('/user/:id', function (req, resp) {
     let founded = false;
     let index = 0;
-    for (let user of USERS) {
+    for (const user of USERS) {
         if (user.id === req.params.id) {
-            USERS.slice(index, 1);
+            USERS.splice(index, 1);
             founded = true;
             break;
         }
