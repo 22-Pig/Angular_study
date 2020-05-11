@@ -10,6 +10,8 @@ import { UserManagementComponentComponent } from './user-management-component/us
 import { ProductComponentComponent } from './product-component/product-component.component';
 import { ExitComponentComponent } from './exit-component/exit-component.component';
 import { Routes, Router, RouterModule } from '@angular/router';
+import { LoginGuard } from './login.guard';
+import { AuthService } from './auth.service';
 
 const mgtChildrenRoutes: Routes = [
   { path: 'user', component: UserManagementComponentComponent },
@@ -24,7 +26,12 @@ const routes: Routes = [
   { path: 'home', component: HomeComponentComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponentComponent },
-  { path: 'management', component: ManagementComponentComponent, children: mgtChildrenRoutes }
+  {
+    path: 'management',
+    component: ManagementComponentComponent,
+    children: mgtChildrenRoutes,
+    canActivate: [LoginGuard]
+  }
 ];
 
 @NgModule({
@@ -42,7 +49,7 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes) // 引入路由模块
   ],
-  providers: [],
+  providers: [LoginGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

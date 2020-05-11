@@ -1,8 +1,10 @@
 <div class="row">
     <nav class="nav flex-column col-md-3">
-        <a class="nav-link active" routerLink="['user']">用户管理</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link active" [routerLink]="['user']">用户管理</a>
+        <a class="nav-link" [routerLink]="['product']">产品管理</a>
+        <a class="nav-link" [routerLink]="['exit']">退出</a>
     </nav>
-</div>>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>
