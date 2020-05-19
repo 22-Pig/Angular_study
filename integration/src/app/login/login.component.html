@@ -27,22 +27,15 @@
         <form class="form-signin" _lpchecked="1">
           <img class="mb-4" src="../../assets/imgs/login.svg" alt="" width="72" height="72">
           <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <label for="inputUsername" class="sr-only">Username</label>
-          <input type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus=""
-            style="background-color: rgb(225, 230, 215); background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-            autocomplete="off">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""
-            style="background-color: rgb(225, 230, 215); background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-            autocomplete="off">
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button class="btn btn-lg btn-info btn-block" type="submit" [routerLink]="['/management']"
-            (click)='login()'>登录</button>
-          <p class="mt-5 mb-3 text-white">© 沈轶东</p>
+          <p id="userNameErr" class="error" style="font-size: .7rem;"></p>
+          <input type="text" name="userName" id="userName" class="form-control" placeholder="Username">
+          <p id="passwordErr" class="error" style="font-size: .7rem;"></p>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+          <br>
+          <button class="btn btn-lg btn-info btn-block" type="submit" [routerLink]="['/management']" (click)='login()'
+            id="btnLogin">登录</button>
+          <p class="mt-4 mb-3 text-white">© 沈轶东</p>
+          <p id="frmErr" class="error"></p>
         </form>
       </div>
     </div>

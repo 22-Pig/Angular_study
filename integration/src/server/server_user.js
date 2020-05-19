@@ -6,19 +6,12 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 var USERS = [{
-    id: '01',
     userName: 'admin',
-    webgrade: '90'
+    password: '123456'
   },
   {
-    id: '02',
-    userName: "pigff",
-    webgrade: '80'
-  },
-  {
-    id: '03',
-    userName: 'smg',
-    webgrade: '85'
+    userName: "aaa",
+    password: '123123'
   }
 ];
 
@@ -37,12 +30,12 @@ app.get('/users', function (req, resp) {
   resp.end();
 });
 
-app.get('/users/:id', function (req, resp) {
+app.get('/users/:userName', function (req, resp) {
   console.log(req.params);
-  const id = req.params.id;
+  const userName = req.params.userName;
   let founded = false;
   for (let user of USERS) {
-    if (user.id === id) {
+    if (user.userName === userName) {
       resp.send([user]);
       founded = true;
       break;
@@ -76,9 +69,9 @@ app.put('/user', function (req, resp) {
   //json
   let founded = false;
   for (let user of USERS) {
-    if (user.id === req.body.id) {
+    if (user.userName === req.body.userName) {
       user.userName = req.body.userName;
-      user.webgrade = req.body.webgrade;
+      user.password = req.body.password;
       founded = true;
       break;
     }
@@ -98,11 +91,11 @@ app.put('/user', function (req, resp) {
 });
 
 // 删除用户
-app.delete('/user/:id', function (req, resp) {
+app.delete('/user/:userName', function (req, resp) {
   let founded = false;
   let index = 0;
   for (const user of USERS) {
-    if (user.id === req.params.id) {
+    if (user.userName === req.params.userName) {
       USERS.splice(index, 1);
       founded = true;
       break;
@@ -124,9 +117,9 @@ app.delete('/user/:id', function (req, resp) {
 });
 
 
-// web服务器监听8080端口
-app.listen(8080, function () {
-  console.log('服务器在8080端口启动！');
+// web服务器监听8848端口
+app.listen(8848, function () {
+  console.log('服务器在8848端口启动!');
 });
 
 
@@ -137,7 +130,7 @@ function getUsers() {
       document.getElementById("demo").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "http://127.0.0.1:8080/users", true);
+  xhttp.open("GET", "http://127.0.0.1:8848/users", true);
   xhttp.send();
 }
 
@@ -148,11 +141,10 @@ function addUsers() {
       document.getElementById("demo").innerHTML = this.responseText;
     }
   };
-  xhttp.open("POST", "http://127.0.0.1:8080/user/", true);
+  xhttp.open("POST", "http://127.0.0.1:8848/user/", true);
   const user = {
-    id: document.getElementById('id').value,
     userName: document.getElementById('userName').value,
-    webgrade: document.getElementById('webgrade').value
+    password: document.getElementById('password').value
   }
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(JSON.stringify(user));

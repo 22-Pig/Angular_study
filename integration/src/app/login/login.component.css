@@ -120,3 +120,29 @@
 /* div {
   border: 1px solid aqua;
 } */
+
+
+
+.error {
+  color: red;
+}
+
+form p {
+  height: .7rem;
+  text-align: left;
+  margin: 0.2rem 0;
+}
+
+form input:focus {
+  /* outline: none; */
+  border: 1px solid rgb(87, 159, 207);
+}
+
+button:focus {
+  outline: none;
+  border: 1px solid lightblue;
+}
+
+.ipt-error {
+  border: 1px solid red;
+}
