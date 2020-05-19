@@ -1,0 +1,87 @@
+<!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> -->
+<div class="chartjs-size-monitor"
+  style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+  <div class="chartjs-size-monitor-expand"
+    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+  </div>
+  <div class="chartjs-size-monitor-shrink"
+    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+  </div>
+</div>
+
+
+<br>
+<div class="row">
+  <div class="col-auto mr-auto">
+    <h2 class="text-info">学生成绩管理</h2>
+  </div>
+  <div class="col-auto"><button type="button" class="btn btn-primary" (click)="search()">查询</button>
+    <button type="button" class="btn btn-success" (click)="add()">添加</button>
+    <button type="button" class="btn btn-danger " (click)="delete()">删除</button>
+    <button type="button" class="btn btn-warning" (click)="update()">修改</button>
+  </div>
+</div>
+<br>
+
+
+
+<form [formGroup]="myForm">
+  <div class="form-group">
+    <label for="id">学号</label>
+    <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+  </div>
+  <div class="form-group">
+    <label for="userName">用户名</label>
+    <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'>
+  </div>
+  <div class="form-group">
+    <label for="webgrade">WEB成绩</label>
+    <input type="text" class="form-control" id="webgrade" name="webgrade" [formControl]='webgrade'>
+  </div>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">学号</th>
+      <th scope="col">用户名</th>
+      <th scope="col">WEB成绩</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let user of users$ | async;let  i = index ' (click)="select(user)">
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.id}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.webgrade}}</td>
+    </tr>
+  </tbody>
+</table>
+<!-- </main> -->
+
+
+
+<!-- <ul class="nav flex-column">
+  <li class="nav-item">
+    <a class="nav-link active">
+      <button type="button" class="btn btn-primary btn-block" (click)="search()">查询</button>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link">
+      <button type="button" class="btn btn-success btn-block" (click)="add()">添加</button>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link">
+      <button type="button" class="btn btn-danger btn-block" (click)="delete()">删除</button>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link">
+      <button type="button" class="btn btn-warning btn-block" (click)="update()">修改</button>
+    </a>
+  </li>
+</ul> -->

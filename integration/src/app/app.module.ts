@@ -10,13 +10,31 @@ import { Routes, Router, RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginGuard } from './login.guard';
+import { AuthService } from './auth.service';
+import { ExitComponent } from './exit/exit.component';
+import { GradeComponent } from './grade/grade.component';
+import { UserComponent } from './user/user.component';
+
+
+const mgtChildrenRoutes: Routes = [
+  { path: 'user', component: UserComponent },
+  { path: 'grade', component: GradeComponent },
+  { path: 'exit', component: ExitComponent },
+  { path: '', redirectTo: 'user', pathMatch: 'full' }
+];
 
 // 定义路由表
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'management', component: ManagementComponent, }
+  {
+    path: 'management',
+    component: ManagementComponent,
+    children: mgtChildrenRoutes,
+    canActivate: [LoginGuard]
+  }
 ];
 
 @NgModule({
@@ -24,7 +42,10 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ManagementComponent
+    ManagementComponent,
+    ExitComponent,
+    GradeComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +55,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
