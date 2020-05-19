@@ -1,0 +1,122 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  background: url("../../assets/imgs/main.jpg") no-repeat;
+  background-size: 100%;
+  /* height: 100%;
+  width: 100%; */
+  background-size: cover;
+  position: absolute;
+  overflow: hidden;
+}
+
+.up {
+  height: 6%;
+}
+
+.row1 {
+  height: 6vh;
+}
+
+.tu {
+  height: 1.5rem;
+}
+
+.one {
+  margin: 0 0 0 2rem;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 25px;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
+  background-color: white;
+  padding: 7px 0;
+  background-clip: content-box;
+}
+
+
+.center {
+  height: 84%;
+}
+
+.you {
+  margin: 0 0 0 10rem;
+}
+
+.row2 {
+  height: 84vh;
+}
+
+.bottom {
+  height: 10%;
+}
+
+.img {
+  opacity: 0.6;
+}
+
+.color {
+  border-top: 1px solid white
+}
+
+/* .font {
+  font-size: 3rem;
+  color: white;
+} */
+
+/* div {
+  border: 1px solid aqua;
+} */
