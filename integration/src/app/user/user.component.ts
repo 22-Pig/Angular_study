@@ -11,21 +11,21 @@ import { User } from './User';
 })
 export class UserComponent implements OnInit {
 
-  myForm: FormGroup;
+  userForm: FormGroup;
   userName: AbstractControl;
   password: AbstractControl;
   users$: Observable<User>;
-  baseUrl = 'http://127.0.0.1:8848/';
+  baseUrl = 'http://127.0.0.1:8080/';
   currentUser: User;
 
   constructor(private fb: FormBuilder, private httpclient: HttpClient) {
-    this.myForm = this.fb.group({
+    this.userForm = this.fb.group({
       'userName': [''],
       'password': ['']
     });
 
-    this.userName = this.myForm.controls['userName'];
-    this.password = this.myForm.controls['password'];
+    this.userName = this.userForm.controls['userName'];
+    this.password = this.userForm.controls['password'];
   }
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
       return 0;
     } else {
       // 对于可观察对象执行，我们需要订阅其结果
-      this.httpclient.post(this.baseUrl + 'user', this.myForm.value).subscribe(
+      this.httpclient.post(this.baseUrl + 'user', this.userForm.value).subscribe(
         (val: any) => {
           if (val.succ) { // val是服务器返回的值
             alert('添加成功!');
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
 
   select(u: User) {
     this.currentUser = u;
-    this.myForm.setValue(this.currentUser);
+    this.userForm.setValue(this.currentUser);
   }
 
   delete() {
@@ -80,7 +80,7 @@ export class UserComponent implements OnInit {
     if (!this.currentUser) {
       alert('必须先选择用户!');
     } else {
-      this.httpclient.put(this.baseUrl + 'user', this.myForm.value).subscribe(
+      this.httpclient.put(this.baseUrl + 'user', this.userForm.value).subscribe(
         (val: any) => {
           if (val.succ) {
             alert('修改成功!');

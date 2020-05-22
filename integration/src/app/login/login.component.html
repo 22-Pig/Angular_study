@@ -24,19 +24,41 @@
         <p class=" display-2 font-weight-bold text-light you">THE FIRST</p>
       </div>
       <div class="col-4 font text-center">
-        <form class="form-signin" _lpchecked="1">
+        <!-- <form [formGroup]="myForm" class="form-signin" _lpchecked="1"> -->
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" class="form-signin" _lpchecked="1">
           <img class="mb-4" src="../../assets/imgs/login.svg" alt="" width="72" height="72">
           <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <p id="userNameErr" class="error" style="font-size: .7rem;"></p>
-          <input type="text" name="userName" id="userName" class="form-control" placeholder="Username">
-          <p id="passwordErr" class="error" style="font-size: .7rem;"></p>
-          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+          <!-- <p *ngIf="myForm.invalid" class="text-danger">表单无效！</p> -->
+          <!-- <p>{{name$ | async}}</p> -->
+          <div style="text-align: left">
+            <input type="text" class="form-control" placeholder="Username" id="userName" aria-describedby="输入用户名"
+              name="userName" [formControl]="userName"
+              [ngClass]="{'is-invalid': userName.invalid,'is-valid':userName.valid}">
+            <div class="valid-feedback" style="margin-top:0;">
+              用户名格式正确！
+            </div>
+            <div class="invalid-feedback" style="margin-top:0;">
+              <span *ngIf="userName.hasError('required')">用户名必须填写！</span>
+              <span *ngIf="!userName.hasError('required') && userName.hasError('invalidUser')">用户名必须以a字母开头！</span>
+            </div>
+          </div>
+          <div style="text-align: left">
+            <input type="password" style="margin-bottom: 0;" class="form-control" placeholder="Password" id="password"
+              name="password" [formControl]="password"
+              [ngClass]="{'is-invalid': password.invalid,'is-valid':password.valid}">
+            <div class="valid-feedback" style="margin-top:0;">
+              密码格式正确！
+            </div>
+            <div class="invalid-feedback" style="margin-top:0;">
+              密码必须大于5位！
+            </div>
+          </div>
           <br>
-          <button class="btn btn-lg btn-info btn-block" type="submit" [routerLink]="['/management']" (click)='login()'
-            id="btnLogin">登录</button>
+          <button class="btn btn-lg btn-info btn-block" type="submit" (click)='login()' id="btnLogin">登录</button>
           <p class="mt-4 mb-3 text-white">© 沈轶东</p>
           <p id="frmErr" class="error"></p>
         </form>
+
       </div>
     </div>
   </div>
