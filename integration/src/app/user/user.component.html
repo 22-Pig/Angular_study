@@ -15,37 +15,139 @@
   <div class="col-auto mr-auto">
     <h2 class="text-info">用户管理</h2>
   </div>
-  <div class="col-auto"><button type="button" class="btn btn-primary" (click)="search()">查询</button>
+  <div class="col-auto">
+    <!-- <button type="button" class="btn btn-primary" (click)="search()">查询</button>
     <button type="button" class="btn btn-success" (click)="add()">添加</button>
+    <button type="button" class="btn btn-danger " (click)="delete()">删除</button> -->
+    <!-- <button type="button" class="btn btn-warning" (click)="update()">修改</button> -->
+    <button type="button" class="btn btn-primary" (click)="openModal(template_search)">查询</button>
+    <button type="button" class="btn btn-success" (click)="openModal(template_add)">添加</button>
     <button type="button" class="btn btn-danger " (click)="delete()">删除</button>
-    <button type="button" class="btn btn-warning" (click)="update()">修改</button>
+    <button type="button" class="btn btn-warning" (click)="openModal(template_update)">修改</button>
   </div>
 </div>
 <br>
 
-<form [formGroup]="userForm">
-  <div class="form-group">
-    <label for="userName">用户名</label>
-    <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'>
+
+<ng-template #template_search>
+  <div class="modal-header">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">查询面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="form-group">
-    <label for="password">密码</label>
-    <input type="password" class="form-control" id="password" name="password" [formControl]='password'>
+  <div class="modal-body">
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="userName">请输入你要查询的用户名：</label>
+        <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'>
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="search();modalRef.hide()">查询</button>
   </div>
-</form>
-<table class="table table-striped">
+</ng-template>
+
+
+<ng-template #template_add>
+  <div class="modal-header">
+    <div class="spinner-border text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">添加面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="userName">用户名</label>
+        <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'
+          [ngClass]="{'is-invalid': userName.invalid,'is-valid':userName.valid}">
+        <div class="valid-feedback">
+          用户名格式正确！
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="userName.hasError('required')">用户名必须填写！</span>
+          <span *ngIf="!userName.hasError('required') && userName.hasError('invalidUser')">用户名必须以a字母开头！</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" name="password" [formControl]='password'
+          [ngClass]="{'is-invalid': password.invalid,'is-valid':password.valid}">
+        <div class="valid-feedback">
+          密码格式正确！
+        </div>
+        <div class="invalid-feedback">
+          密码必须大于5位！
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-success btn-lg btn-block" (click)="add();modalRef.hide()">添加</button>
+  </div>
+</ng-template>
+
+
+<ng-template #template_update>
+  <div class="modal-header">
+    <div class="spinner-border text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">修改面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="userName">用户名</label>
+        <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'
+          [ngClass]="{'is-invalid': userName.invalid,'is-valid':userName.valid}">
+        <div class="valid-feedback">
+          用户名格式正确！
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="userName.hasError('required')">用户名必须填写！</span>
+          <span *ngIf="!userName.hasError('required') && userName.hasError('invalidUser')">用户名必须以a字母开头！</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" name="password" [formControl]='password'
+          [ngClass]="{'is-invalid': password.invalid,'is-valid':password.valid}">
+        <div class="valid-feedback">
+          密码格式正确！
+        </div>
+        <div class="invalid-feedback">
+          密码必须大于5位！
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-warning btn-lg btn-block" (click)="update();modalRef.hide()">修改</button>
+  </div>
+</ng-template>
+
+
+<table class="table table-striped text-center">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">用户名</th>
       <th scope="col">密码</th>
+      <th scope="col">选中状态</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor='let user of users$ | async;let  i = index ' (click)="select(user)">
+    <tr class="text-center" *ngFor='let user of users$ | async;let  i = index ' (click)="select(user)">
       <th scope="row">{{i+1}}</th>
       <td>{{user.userName}}</td>
       <td>{{user.password}}</td>
+      <td><input type="radio" class="form-check-input" id="exampleCheck1"></td>
     </tr>
   </tbody>
 </table>

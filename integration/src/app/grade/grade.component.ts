@@ -1,8 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Stu } from './Stu';
+
+import { TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
+
+function webgradeValidator(control: FormControl): { [s: string]: boolean } {
+  if (!control.value.match(/^((?!0)\d{1,2}|100)$/)) {
+    return { invalidWebgrade: true };
+  }
+}
+
 
 @Component({
   selector: 'app-grade',
@@ -18,17 +30,29 @@ export class GradeComponent implements OnInit {
   stus$: Observable<Stu>;
   baseUrl = 'http://127.0.0.1:8080/';
   currentUser: Stu;
+  modalRef: BsModalRef;
+  name$: Observable<string>;
 
-  constructor(private fb: FormBuilder, private httpclient: HttpClient) {
+  constructor(private fb: FormBuilder, private httpclient: HttpClient, private modalService: BsModalService) {
     this.stuForm = this.fb.group({
       'id': [''],
       'stuName': [''],
-      'webgrade': ['']
+      'webgrade': ['', Validators.compose([Validators.required, webgradeValidator])]
     });
 
     this.id = this.stuForm.controls['id'];
     this.stuName = this.stuForm.controls['stuName'];
     this.webgrade = this.stuForm.controls['webgrade'];
+    this.name$ = this.webgrade.valueChanges;
+    this.webgrade.valueChanges.subscribe(val => {
+      //可以在此实现自己的业务逻辑
+      console.log(val);
+    });
+  }
+
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   // 页面初始化
@@ -44,6 +68,13 @@ export class GradeComponent implements OnInit {
     }
   }
 
+  searchall() {
+    if (this.id.value) {
+      this.stus$ = <Observable<Stu>>this.httpclient.get(this.baseUrl + 'stus');
+      // this.stuForm.patchValue(null);
+    }
+  }
+
   add() {
     if (!this.id.value) {
       alert('学号为空，不能添加!');
@@ -54,11 +85,11 @@ export class GradeComponent implements OnInit {
         (val: any) => {
           if (val.succ) { // val是服务器返回的值
             alert('添加成功!');
+            this.searchall();
           }
         }
       );
     }
-
   }
 
   select(u: Stu) {
@@ -74,6 +105,7 @@ export class GradeComponent implements OnInit {
         (val: any) => {
           if (val.succ) {
             alert('删除成功!');
+            this.searchall();
           }
         }
       )
@@ -88,9 +120,11 @@ export class GradeComponent implements OnInit {
         (val: any) => {
           if (val.succ) {
             alert('修改成功!');
+            this.searchall();
           }
         }
       )
     }
+    // console.log("sds");
   }
 }

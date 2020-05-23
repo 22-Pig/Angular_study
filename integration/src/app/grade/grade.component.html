@@ -15,43 +15,138 @@
   <div class="col-auto mr-auto">
     <h2 class="text-info">学生成绩管理</h2>
   </div>
-  <div class="col-auto"><button type="button" class="btn btn-primary" (click)="search()">查询</button>
+  <div class="col-auto">
+    <!-- <button type="button" class="btn btn-primary" (click)="search()">查询</button>
     <button type="button" class="btn btn-success" (click)="add()">添加</button>
     <button type="button" class="btn btn-danger " (click)="delete()">删除</button>
-    <button type="button" class="btn btn-warning" (click)="update()">修改</button>
+    <button type="button" class="btn btn-warning" (click)="update()">修改</button> -->
+    <button type="button" class="btn btn-primary" (click)="openModal(template_search)">查询</button>
+    <button type="button" class="btn btn-success" (click)="openModal(template_add)">添加</button>
+    <button type="button" class="btn btn-danger " (click)="delete()">删除</button>
+    <button type="button" class="btn btn-warning" (click)="openModal(template_update)">修改</button>
   </div>
 </div>
 <br>
 
-<form [formGroup]="stuForm">
-  <div class="form-group">
-    <label for="id">学号</label>
-    <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+<ng-template #template_search>
+  <div class="modal-header">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">查询面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="form-group">
-    <label for="stuName">学生姓名</label>
-    <input type="text" class="form-control" id="stuName" name="stuName" [formControl]='stuName'>
+  <div class="modal-body">
+    <form [formGroup]="stuForm">
+
+      <div class="form-group">
+        <label for="id">请输入你要查询的学生ID：</label>
+        <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="search();modalRef.hide()">查询</button>
   </div>
-  <div class="form-group">
-    <label for="webgrade">WEB成绩</label>
-    <input type="text" class="form-control" id="webgrade" name="webgrade" [formControl]='webgrade'>
+</ng-template>
+
+<ng-template #template_add>
+  <div class="modal-header">
+    <div class="spinner-border text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">添加面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</form>
-<table class="table table-striped">
+  <div class="modal-body">
+    <form [formGroup]="stuForm">
+      <div class="form-group">
+        <label for="id">学号</label>
+        <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+      </div>
+      <div class="form-group">
+        <label for="stuName">学生姓名</label>
+        <input type="text" class="form-control" id="stuName" name="stuName" [formControl]='stuName'>
+      </div>
+      <div class="form-group">
+        <label for="webgrade">WEB成绩</label>
+        <input type="text" class="form-control" id="webgrade" name="webgrade" [formControl]='webgrade'
+          [ngClass]="{'is-invalid': webgrade.invalid,'is-valid':webgrade.valid}">
+        <div class="valid-feedback">
+          <!-- WEB成绩格式正确！ -->
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="webgrade.hasError('required')">WEB成绩不能为空！</span>
+          <!-- <span *ngIf="!webgrade.hasError('required') && webgrade.hasError('invalidWebgrade')">WEB成绩必须≥0且≤100！</span> -->
+          <span
+            *ngIf="!webgrade.hasError('required') && webgrade.hasError('invalidWebgrade')">WEB成绩必须是0-100之间的整数！</span>
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-success btn-lg btn-block" (click)="add();modalRef.hide()">添加</button>
+  </div>
+</ng-template>
+
+<ng-template #template_update>
+  <div class="modal-header">
+    <div class="spinner-border text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <h4 class="modal-title pull-left">修改面板</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="stuForm">
+      <div class="form-group">
+        <label for="id">学号</label>
+        <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+      </div>
+      <div class="form-group">
+        <label for="stuName">学生姓名</label>
+        <input type="text" class="form-control" id="stuName" name="stuName" [formControl]='stuName'>
+      </div>
+      <div class="form-group">
+        <label for="webgrade">WEB成绩</label>
+        <input type="text" class="form-control" id="webgrade" name="webgrade" [formControl]='webgrade'
+          [ngClass]="{'is-invalid': webgrade.invalid,'is-valid':webgrade.valid}">
+        <div class="valid-feedback">
+          <!-- WEB成绩格式正确！ -->
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="webgrade.hasError('required')">WEB成绩不能为空！</span>
+          <!-- <span *ngIf="!webgrade.hasError('required') && webgrade.hasError('invalidWebgrade')">WEB成绩必须≥0且≤100！</span> -->
+          <span
+            *ngIf="!webgrade.hasError('required') && webgrade.hasError('invalidWebgrade')">WEB成绩必须是0-100之间的整数！</span>
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-warning btn-lg btn-block" (click)="update();modalRef.hide()">修改</button>
+  </div>
+</ng-template>
+
+
+
+<table class="table table-striped text-center">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">学号</th>
       <th scope="col">学生姓名</th>
       <th scope="col">WEB成绩</th>
+      <th scope="col">选中状态</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor='let stu of stus$ | async;let  i = index ' (click)="select(stu)">
+    <tr class="text-center" *ngFor='let stu of stus$ | async;let  i = index ' (click)="select(stu)">
       <th scope="row">{{i+1}}</th>
       <td>{{stu.id}}</td>
       <td>{{stu.stuName}}</td>
       <td>{{stu.webgrade}}</td>
+      <td><input type="radio" class="form-check-input" id="exampleCheck1" value="option1"></td>
     </tr>
   </tbody>
 </table>

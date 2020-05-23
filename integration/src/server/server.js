@@ -49,10 +49,12 @@ app.post('/users', function (req, resp) {
       resp.send({
         succ: true
       });
-      resp.end();
       return;
     }
   }
+  resp.send({
+    succ: false
+  });
   resp.end();
 });
 

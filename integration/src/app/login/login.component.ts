@@ -72,10 +72,10 @@ export class LoginComponent implements OnInit {
         if (val.succ == true) {
           this.authService.login();
           this.router.navigate(['/management']);
+        } else if ((val.succ == false)) {
+          alert('用户名或密码错误！');
         }
       });
-    } else {
-      alert('表单无效！');
     }
   }
 }

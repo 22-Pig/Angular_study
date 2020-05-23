@@ -16,6 +16,7 @@ import { ExitComponent } from './exit/exit.component';
 import { GradeComponent } from './grade/grade.component';
 import { UserComponent } from './user/user.component';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const mgtChildrenRoutes: Routes = [
   { path: 'user', component: UserComponent },
@@ -33,7 +34,7 @@ const routes: Routes = [
     path: 'management',
     component: ManagementComponent,
     children: mgtChildrenRoutes,
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   }
 ];
 
@@ -53,7 +54,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes), // 引入路由模块
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ],
   providers: [LoginGuard, AuthService],
   bootstrap: [AppComponent]
