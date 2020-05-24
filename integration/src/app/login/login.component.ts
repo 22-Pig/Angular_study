@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './User';
 import { myService } from '../service';
+import { query } from '@angular/animations';
 
 function userNameValidator(control: FormControl): { [s: string]: boolean } {
   if (!control.value.match(/^a/)) {
@@ -46,14 +47,17 @@ export class LoginComponent implements OnInit {
     this.userName.valueChanges.subscribe(val => {
       //可以在此实现自己的业务逻辑
       console.log(val);
+      this.msg = val;
     });
   }
 
   sendValue() {
     this.service.data = {
       name: this.userName
+
     }
-    this.router.navigate(['management'], name)
+    this.router.navigate(['management'], name),
+      console.log(name);
   }
 
   onSubmit(value: any) {
@@ -71,6 +75,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.users$ = <Observable<User>>this.httpclient.get(this.baseUrl + 'users');
     // this.myStore.list.push(213);
+    console.log(this.msg);
   }
 
   login() {
@@ -79,7 +84,7 @@ export class LoginComponent implements OnInit {
         console.log(val);
         if (val.succ == true) {
           this.authService.login();
-          this.router.navigate(['/management']);
+          this.router.navigate(['/management'], { queryParams: { user: this.msg } });
         } else if ((val.succ == false)) {
           alert('用户名或密码错误！');
         }
