@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './User';
 import { myService } from '../service';
 import { query } from '@angular/animations';
+import { stringify } from 'querystring';
 
 function userNameValidator(control: FormControl): { [s: string]: boolean } {
   if (!control.value.match(/^a/)) {
@@ -46,8 +47,9 @@ export class LoginComponent implements OnInit {
     this.name$ = this.userName.valueChanges;
     this.userName.valueChanges.subscribe(val => {
       //可以在此实现自己的业务逻辑
-      console.log(val);
+      // console.log(val);
       this.msg = val;
+      console.log(this.msg);
     });
   }
 
