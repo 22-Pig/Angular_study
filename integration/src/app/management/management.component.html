@@ -4,7 +4,21 @@
     style="background-color: rgb(225, 230, 215);"> -->
   <ul class="nav justify-content-end">
     <li class="nav-item">
-      <a class="nav-link text-light" [routerLink]="['/login']">切换账号</a>
+      <!-- <a class="nav-link text-light" [routerLink]="['/login']">切换账号</a> -->
+
+      <div class="btn-group mr-3">
+        <button type="button" class="btn btn-outline-light">当前用户：</button>
+        <!-- <div>{{msg}}</div>> -->
+        <!-- {{msg}} -->
+        <!-- <p class="text-light" #action>{{msg}}</p> -->
+        <!-- <button (click)="handelClick()">获取</button> -->
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button class="btn btn-outline-light dropdown-toggle-split" ngbDropdownToggle></button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button ngbDropdownItem><a class="text-decoration-none" [routerLink]="['/login']">切换账号</a></button>
+          </div>
+        </div>
+      </div>
     </li>
     <li class="nav-item ">
       <a class="nav-link text-light" [routerLink]="['exit']">退出</a>
@@ -58,7 +72,7 @@
             </a>
           </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>button</span>
           <a class="d-flex align-items-center text-muted" aria-label="Add a new report">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -69,7 +83,7 @@
               <line x1="8" y1="12" x2="16" y2="12"></line>
             </svg>
           </a>
-        </h6>
+        </h6> -->
 
 
       </div>

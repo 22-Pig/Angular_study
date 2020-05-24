@@ -24,3 +24,16 @@
 .card-deck .card {
   min-width: 220px;
 }
+
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  background: url("../../assets/imgs/light-1282314_1920.jpg") no-repeat;
+  background-size: 100%;
+  /* height: 100%;
+  width: 100%; */
+  background-size: cover;
+  position: absolute;
+  overflow: hidden;
+}

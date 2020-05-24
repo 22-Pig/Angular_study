@@ -15,6 +15,12 @@ function webgradeValidator(control: FormControl): { [s: string]: boolean } {
   }
 }
 
+function idValidator(control: FormControl): { [s: string]: boolean } {
+  if (!control.value.match(/^[0-9]*$/)) {
+    return { invalidId: true };
+  }
+}
+
 
 @Component({
   selector: 'app-grade',
@@ -35,7 +41,7 @@ export class GradeComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private httpclient: HttpClient, private modalService: BsModalService) {
     this.stuForm = this.fb.group({
-      'id': [''],
+      'id': ['', Validators.compose([Validators.required, idValidator])],
       'stuName': [''],
       'webgrade': ['', Validators.compose([Validators.required, webgradeValidator])]
     });

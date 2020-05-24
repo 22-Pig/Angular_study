@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './User';
-
+import { myService } from '../service';
 
 function userNameValidator(control: FormControl): { [s: string]: boolean } {
   if (!control.value.match(/^a/)) {
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   baseUrl = 'http://127.0.0.1:8080/';
   currentUser: User;
   users$: Observable<User>;
-
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private httpclient: HttpClient) {
+  msg: string;
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private httpclient: HttpClient, public service: myService) {
     this.myForm = this.fb.group(
       {
         'userName': ['', Validators.compose([Validators.required, userNameValidator])],
@@ -49,6 +49,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  sendValue() {
+    this.service.data = {
+      name: this.userName
+    }
+    this.router.navigate(['management'], name)
+  }
+
   onSubmit(value: any) {
     // if (this.myForm.invalid) {
     //   alert('表单无效！');
@@ -63,6 +70,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.users$ = <Observable<User>>this.httpclient.get(this.baseUrl + 'users');
+    // this.myStore.list.push(213);
   }
 
   login() {
