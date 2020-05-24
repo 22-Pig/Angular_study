@@ -40,7 +40,7 @@ const routes: Routes = [
     path: 'management',
     component: ManagementComponent,
     children: mgtChildrenRoutes,
-    // canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   }
 ];
 
